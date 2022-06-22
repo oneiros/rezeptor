@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../shared/bootstrap.css">
+    <script src="js/app.js"></script>
+    <title>Rezeptor</title>
+  </head>
+  <body>
+    <div class="container" x-data="{ ingredients: [], newName: '' }">
+      <h1>Rezeptor</h1>
+      <h2>Add new recipe</h2>
+      <div class="mt-4 mb-2"><strong>Ingredients</strong></div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="w-25">Amount</th>
+            <th class="w-50">Name</th>
+            <th class="w-25"></th>
+          </tr>
+        </thead>
+        <tbody id="ingredient-list">
+          <template x-for="(ingredient, index) in ingredients">
+            <tr>
+              <td>
+                <button type="button" @click="ingredient.amount--" class="decrease-amount btn btn-primary btn-sm">-</button>
+                <input type="number" x-bind:name="`ingredients[${index}][amount]`" x-bind:value="ingredient.amount" class="form-control d-inline w-auto">
+                <button type="button" @click="ingredient.amount++" class="increase-amount btn btn-primary btn-sm">+</button>
+              </td>
+              <td>
+                <input type="text" x-bind:name="`ingredients[${index}][name]`" x-bind:value="ingredient.name" readonly class="w-100 form-control">
+              </td>
+              <td>
+                <button type="button" @click="ingredients.splice(ingredients.indexOf(ingredient), 1)" class="remove-ingredient btn btn-danger">Remove</button>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+      <div class="mt-5">
+        <form id="new-ingredient" @submit.prevent="ingredients.push({amount: 1, name: newName}) ; newName = ''">
+          <label>
+            Name:
+            <input type="text" x-model="newName" name="name" class="form-control">
+          </label>
+          <button type="submit" class="btn btn-success">Add Ingredient</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+

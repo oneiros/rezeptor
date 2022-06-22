@@ -1,0 +1,15 @@
+{
+  "name": "rezeptor",
+  "version": "0.0.1",
+  "description": "Alpine.js version of rezeptor",
+  "scripts": {
+    "build": "esbuild --bundle src/app.js --outfile=js/app.js",
+    "watch": "esbuild --bundle src/app.js --outfile=js/app.js --watch"
+  },
+  "author": "David Roetzel",
+  "license": "MIT",
+  "dependencies": {
+    "alpinejs": "^3.10.2",
+    "esbuild": "^0.14.47"
+  }
+}
